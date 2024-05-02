@@ -135,6 +135,10 @@ const ProductDetails = ({ product, extraProducts }: ProductDetailsProps) => {
         <h3 className="px-5 font-semibold">Sucos</h3>
         <ProductList products={extraProducts} />
       </div>
+
+      <div className="mt-6 px-5">
+        <Button className="w-full font-semibold">Adicionar a Sacola</Button>
+      </div>
     </div>
   );
 };
