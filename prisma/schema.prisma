@@ -38,15 +38,25 @@ model Product {
   restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
   categoryId         String
   category           Category   @relation(fields: [categoryId], references: [id])
-  orders             Order[]
+
+  orderProducts OrderProduct[]
   createdAt          DateTime   @default(now())
+}
+
+model OrderProduct {
+  id String @id @default(uuid())
+  orderId String
+  order Order @relation(fields: [orderId], references: [id])
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  quantity Int
 }
 
 model Order {
   id            String      @id @default(uuid())
   userId        String
   user          User        @relation(fields: [userId], references: [id])
-  products      Product[]
+  products      OrderProduct[]
   restaurantId  String
   restaurant    Restaurant  @relation(fields: [restaurantId], references: [id])
   deliveryFee   Decimal     @db.Decimal(10, 2)
@@ -56,6 +66,7 @@ model Order {
   totalDiscounts Decimal     @db.Decimal(10, 2)
   createdAt     DateTime    @default(now())
   status        OrderStatus
+
 }
 
 enum OrderStatus {
