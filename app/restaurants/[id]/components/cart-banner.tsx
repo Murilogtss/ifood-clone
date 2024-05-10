@@ -27,7 +27,7 @@ const CartBanner = ({ restaurant }: CartBannerProps) => {
   if (!restaurantHasProductsOnCart) return null;
 
   return (
-    <div className="border-muted-foreground fixed bottom-0 left-0  z-50 w-full border-t border-solid bg-white p-5 pt-3 shadow-md">
+    <div className="border-muted-foreground fixed bottom-0 left-0  z-40 w-full border-t border-solid bg-white p-5 pt-3 shadow-md">
       <div className="flex items-center justify-between">
         <div>
           <span className="text-muted-foreground text-xs">
