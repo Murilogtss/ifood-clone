@@ -6,6 +6,7 @@ import { StarIcon } from "lucide-react";
 import DeliveryInfo from "@/app/_components/delivery-info";
 import ProductList from "@/app/_components/product-list";
 import CartBanner from "./components/cart-banner";
+import { getServerSession } from "next-auth";
 
 type RestaurantPageProps = {
   params: {
@@ -48,9 +49,19 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
     return notFound();
   }
 
+  const session = await getServerSession();
+  const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
+    where: {
+      userId: session?.user.id,
+    },
+  });
+
   return (
     <div>
-      <RestaurantImage restaurant={restaurant} />
+      <RestaurantImage
+        restaurant={restaurant}
+        userFavoriteRestaurants={userFavoriteRestaurants}
+      />
 
       <div className="relative z-40 mt-[-1.5rem] flex justify-between rounded-tl-3xl rounded-tr-3xl bg-white px-5 py-5">
         {/* Titulo */}
